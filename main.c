@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:14:27 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/13 14:12:11 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:54:23 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	main(void)
 
     len_b = 7;
 	stack_b = malloc(sizeof(int)*len_b);
-	stack_b[0] = 0;
-	stack_b[1] = 2;
-	stack_b[2] = 4;
+	stack_b[0] = 21;
+	stack_b[1] = 13;
+	stack_b[2] = 9;
 	stack_b[3] = 6;
-	stack_b[4] = 9;
-	stack_b[5] = 13;
-	stack_b[6] = 21;
+	stack_b[4] = 4;
+	stack_b[5] = 2;
+	stack_b[6] = 0;
 
     //Checking BEFORE:
 	printf("Beginning:\n");

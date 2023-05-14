@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:53:56 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/13 15:07:45 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/05/14 14:27:21 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int sum_moves(int *stack_a, int index, int *stack_b, int len_a, int len_b);
 int get_cheapest_nb(int *stack_a, int *stack_b, int len_a, int len_b);
 
 //file: utils.c
+int strcmp (const char *str1, const char *str2);
+
 //int	    len_arr(int *stack);
 void	put_arr(int *stack, int len);
 void put_2stacks (int *stack_a, int len_a, int *stack_b, int len_b);

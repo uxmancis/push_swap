@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:58:00 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/13 17:34:14 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:35:06 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,27 @@
 	//return (sizeof(stack)/sizeof(stack[0]));
 	return (len);
 }*/
+
+/*DESCRIPTION
+strcmp function compares str1 and str2. 
+Returns:
+1: NOT the same, they are different
+0: 100% same str.
+------------------------------------------------*/
+int strcmp (const char *str1, const char *str2)
+{
+	int i; 
+	
+	i = 0;
+	while (str1[i] != '\0' || str2[i] != '\0')
+	{
+		if (str1[i] == str2[i])
+			i++;
+		else
+			return(1);
+	}
+	return (0);
+}
 
 void put_matrix (char **list_moves)
 {
@@ -78,6 +99,7 @@ void put_2stacks (int *stack_a, int len_a, int *stack_b, int len_b)
 	int max_numof_lines;
 	char longest;
 	int diff;
+	int i;
 
 	//printf("len_a = %d\n", len_a);
 	//printf("len_b = %d\n", len_b);
@@ -100,30 +122,30 @@ void put_2stacks (int *stack_a, int len_a, int *stack_b, int len_b)
 	len_a = len_a - 1;
 	len_b = len_b - 1;
 	//printf("v2 len_a = ")
+	i = 0;
 	while(min_numof_lines > 0)
 	{
-		printf("stack_a[%d] = %d               stack_b[%d] = %d\n", len_a, stack_a[len_a], len_b, stack_b[len_b]);
-		len_a--;
-		len_b--;
+		printf("stack_a[%d] = %d               stack_b[%d] = %d\n", i, stack_a[i], i, stack_b[i]);
+		i++;
 		min_numof_lines--;
 	}
+	//printf ("i = %d\n", i);
 	//printf("max_numof_lines = %d\n", max_numof_lines);
 	//printf("min_numof_lines = %d\n", min_numof_lines);
 	if(longest == 'A')
 	{
 		while (diff > 0)
 		{
-			printf("stack_a[%d] = %d\n", len_a, stack_a[len_a]);
+			printf("stack_a[%d] = %d\n", i, stack_a[i]);
 			diff--;
 		}
 	}
-	
 	if (longest == 'B')
 	{	
 		while (diff > 0)
 		{
-			printf("                             stack_b[%d] = %d\n", len_b, stack_a[len_b]);
-			len_b--;
+			printf("                             stack_b[%d] = %d\n", i, stack_b[i]);
+			i++;
 			diff--;
 		}
 	}
@@ -131,14 +153,14 @@ void put_2stacks (int *stack_a, int len_a, int *stack_b, int len_b)
 
 void	put_arr(int *stack, int len)
 {
-	//int	len;
+	int i;
 
-	//len = len_arr(stack);
-	len = len - 1;
-	while (len >= 0)
+	i = 0;
+	while (len > 0)
 	{
-		printf("stack[%d] = %d\n", len, stack[len]);
+		printf("stack[%d] = %d\n", i, stack[i]);
 		len--;
+		i++;
 	}
 }
 

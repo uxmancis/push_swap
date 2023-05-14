@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:35:57 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/13 11:53:52 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:12:40 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ int	*push_checksrc(int *stack_src, int *stack_dst, int len_src, int len_dst) //s
 {
 	int	tmp;
 	int	i;
+	int new_len_src;
+	int new_len_dst;
 	int	*new_stack_src;
 	int	*new_stack_dst;
 
+	new_len_src = len_src - 1;
+	printf("\nestamos en PUSH_CHECKSRC\n");
 	//1. Store 1st value of stack_src in tmp variable
 	tmp = stack_src[0];
 	//2. Move up the rest of values of stack_src // copy in new resized_stack
@@ -70,8 +74,11 @@ int	*push_checksrc(int *stack_src, int *stack_dst, int len_src, int len_dst) //s
 	}
 	i = 0;
 	free(stack_src);
-	
+	//printf("new_stack_a = ");
+	//put_arr(new_stack_src, (new_len_src));
+	printf("\n");
 	//3. Move down total values of stack_dst
+	new_len_dst = len_dst + 1;
 	new_stack_dst = malloc(sizeof(int)*(len_dst + 1));
 	i = 0;
 	while(len_dst > 0)
@@ -84,11 +91,12 @@ int	*push_checksrc(int *stack_src, int *stack_dst, int len_src, int len_dst) //s
 	free(stack_dst);
 	//4. Assign tmp value to stack_dst[0]
 	new_stack_dst[0] = tmp;
+	put_2stacks(new_stack_src, new_len_src, new_stack_dst, new_len_dst);
 	return (new_stack_src);
 }
 
 //Just 1 stack involved. Len of array doesn't change
-int	*rotate(int *stack, int len) //Len of array doesn't change
+int	*reverse_rotate(int *stack, int len) //Len of array doesn't change
 {
 	int	tmp;
 	int	i;
@@ -110,13 +118,14 @@ int	*rotate(int *stack, int len) //Len of array doesn't change
 }
 
 //Just 1 stack involved. Len of array doesn't change
-int	*reverse_rotate(int *stack, int len)
+int	*rotate(int *stack, int len)
 {
 	int	tmp;
 	//int len;
 	int	keep_len;
 	int	i;
 	
+	//printf("ha entrado en rotate_b\n");
 	//len = len_arr(stack);
 	keep_len = len;
 	tmp = stack[0];
@@ -135,14 +144,12 @@ int	*reverse_rotate(int *stack, int len)
 int	*swap(int *stack, int len)
 {
 	int	tmp;
-	//int	len;
 
-	//len = len_arr(stack);
 	if (len < 2)
 		return (0);
-	tmp = stack[len - 1];
-	stack[len - 1] = stack[len - 2];
-	stack[len - 2] = tmp;
+	tmp = stack[0];
+	stack[0] = stack[1];
+	stack[1] = tmp;
 	return (stack);
 }
 
@@ -174,5 +181,11 @@ int	*swap(int *stack, int len)
 
 	//new_stack_b = malloc(sizeof(int)*(len_b + 1));
 	//new_stack_b = push_checkdst(stack_a, stack_b, len_a, len_b);
+	printf("Before:\n");
+	put_arr(stack_a, len_a);
+	printf("\n");
+	push_checksrc(stack_a, stack_b, len_a, len_b);
+	printf("After:\n");
+	put_arr(stack_a, len_a);
 	return (0);
 }*/

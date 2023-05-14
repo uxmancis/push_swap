@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:23:56 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/13 13:33:02 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:00:56 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int org_stack_b (int *stack_b, int len_b, int index_ns)
 	//printf("call2moves.c line 88 | index_ns = %d\n", index_ns);
 	if (len_b == 2) //Before making number travel
 		numof_moves = 0;
-	if (index_ns < (len_b / 2))
-		numof_moves = (index_ns + 1);
-	if (index_ns >= (len_b / 2))
-		numof_moves = (len_b - index_ns - 1);
+	if (index_ns <= (len_b / 2))
+		numof_moves = index_ns;
+	if (index_ns > (len_b / 2))
+		numof_moves = len_b - index_ns;
 	//printf("org_stack_b | index_ns = %d | numof_moves = %d\n", index_ns, numof_moves);
 	return (numof_moves);
 }
@@ -105,14 +105,14 @@ int top_stack (int len, int index)
 		write(1, "Error: accessing to number of stack with this index\n", 52);
 		return (0);
 	}
-	if (index == (len - 1))
+	if (index == 0)
 		numof_moves = 0; //el valor que ya está en la última posición / top del stack_a
-	if (index == (len - 2))
+	if (index == 1)
 		numof_moves = 1; //swap 1 vez
-	if (index < (len / 2)) //este código también contempla el caso de index = 1 y el rtdo es el mismo, pero el move a hacer no.
-		numof_moves = index + 1; //rotate n veces
-	if (index >= (len / 2) && index != len)
-		numof_moves = (len - index - 1); // reverse rotate n veces
+	if (index <= (len / 2)) //este código también contempla el caso de index = 1 y el rtdo es el mismo, pero el move a hacer no.
+		numof_moves = index; //rotate n veces
+	if (index > (len / 2) && index != len)
+		numof_moves = (len - index); // reverse rotate n veces
 	//printf("top_stack | index = %d | numof_moves = %d\n", index, numof_moves);
 	return (numof_moves);
 }
@@ -127,18 +127,18 @@ For that, it will take into account the followings:
 3. + 1 = push_b (pb) movement, to travel*/
 int sum_moves(int *stack_a, int index, int *stack_b, int len_a, int len_b)
 {
-	int moves_top_stack;
-	int moves_org_b;
-	int total_moves;
+	int numof_moves_top_stack;
+	int numof_moves_org_b;
+	int total_numof_moves;
 
 	printf("index = %d\n", index);
-	moves_top_stack = top_stack (len_a, index);
-	printf("moves_top_stack = %d\n", moves_top_stack);
-	moves_org_b = org_stack_b (stack_b, len_b, index_next_smallest(stack_b, len_b, stack_a[index]));
-	printf("moves_org_b = %d\n", moves_org_b);
-	total_moves = moves_top_stack + moves_org_b + 1;
-	printf("TOTAL_moves = %d\n\n", total_moves);
-	return (total_moves);
+	numof_moves_top_stack = top_stack (len_a, index);
+	printf("moves_top_stack = %d\n", numof_moves_top_stack);
+	numof_moves_org_b = org_stack_b (stack_b, len_b, index_next_smallest(stack_b, len_b, stack_a[index]));
+	printf("moves_org_b = %d\n", numof_moves_org_b);
+	total_numof_moves = numof_moves_top_stack + numof_moves_org_b + 1;
+	printf("TOTAL_moves = %d\n\n", total_numof_moves);
+	return (total_numof_moves);
 }
 
 /*DESCRIPTION
