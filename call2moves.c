@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:47:45 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/14 17:11:28 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/05/15 07:10:24 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@
 	}
 	return (0);
 }*/
+
+// Structure defined outside of a function
+structure 2stacks
+{
+	int *stack_a;
+	int *stack_b;
+}
+
+struct 2stacks replace_values(int *stack_a, int *stack_b, int len_a, int len_b)
+{
+	struct 2stacks new;
+
+	new.stack_a = malloc(sizeof(int) * (len_a - 1));
+	new_stack_b = malloc(sizeof(int) * (len_b + 1));
+
+	
+}
 
 void decide_move_both_stacks(char *move_type, int *stack_a, int len_a, int *stack_b, int len_b)
 {
@@ -129,6 +146,7 @@ void call2moves(int numof_moves_top_stack, char *move_type_top_stack, int numof_
 	//put_2stacks(stack_a, len_a, stack_b, len_b);
 	//call2: pb
 	push_checksrc(stack_a, stack_b, len_a, len_b);
+	
 	//put_arr(stack_a, (len_a - 1));
 	//push_checkdst(stack_a, stack_b, len_a, len_b);
 	//put_2stacks(stack_a, len_a, stack_b, len_b);
