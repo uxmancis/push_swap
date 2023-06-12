@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:41:51 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/06/11 12:46:04 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:41:54 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void decide_move_both_stacks(char *move_type, int **stack_a, int *len_a, int **s
 void decide_move_stack_b(char *move_type, int **stack_b, int *len_b);
 void decide_move_stack_a(char *move_type, int **stack_a, int *len_a); 
 void call2moves(int numof_moves_top_stack, char *move_type_top_stack, int numof_moves_org_b, char *move_type_org_b, int **stack_a, int *len_a, int **stack_b, int *len_b);
-char *org_stack_b_2s_move (int *stack_b, int len_b, int index_ns);
+char *org_stack_b_2s_move (int *stack_b, int len_b, int index_top_b);
 char *top_stack_2s_move (int len, int index);
 int *which_moves(int **stack_a, int *len_a, int **stack_b, int *len_b, int index_travel_nb);

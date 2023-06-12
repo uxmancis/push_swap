@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:42:32 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/06/11 15:55:11 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/11 16:21:15 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	*sort_it(int *stack_a, int len_stack_a, int *stack_b, int len_stack_b) //se 
 		decide_move_both_stacks("pa", &stack_b, &len_stack_b, &stack_a, &len_stack_a);
 		keep_len_stack_b--;
 	}*/
-
 	return (0);
 }
 

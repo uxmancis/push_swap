@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:30:41 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/06/11 15:34:01 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:43:46 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ way: stack_a moves (decide_move_stack_a), then stack_b moves (decide_move_stack_
 -------------------------------------------------------------------*/
 void decide_move_both_stacks(char *move_type, int **stack_a, int *len_a, int **stack_b, int *len_b)
 {
-    printf("exec_moves.c | line 28 | AQUÍ TAMBIÉ HA LLLEGAOOO\n");
+    //printf("exec_moves.c | line 28 | AQUÍ TAMBIÉ HA LLLEGAOOO\n");
     if(ft_strcmp(move_type, "pa") == 0) //??????????????????????????????
     {
         push(stack_b, len_b, stack_a, len_a);//call to the movement
@@ -51,7 +51,7 @@ which involve both of the stacks.
 -------------------------------------------------------------------*/
 void decide_move_stack_b(char *move_type, int **stack_b, int *len_b) //cambiaré el prototipo a int *decide_move, porque como lo utilizaré para llamar a los movimientos, voy a querer recibir los stacks modificados.
 {
-    printf("\nESTAMOS DENTRO DE DECIDE_MOVE: stack A\n");
+    //printf("\nESTAMOS DENTRO DE DECIDE_MOVE: stack A\n");
     //put_str(move_type);
     if(ft_strcmp(move_type, "sb") == 0)
     {
@@ -121,6 +121,7 @@ void call2moves(int numof_moves_top_stack, char *move_type_top_stack, int numof_
         numof_moves_top_stack--;
     }
     //call2moves_ ORGANISE B
+    printf("exec_moves.c | line 124 | numof_moves_org_b = %d\n", numof_moves_org_b);
     while(numof_moves_org_b > 0)
     {
         printf("ORG_B | line 82 | move_type_org_b:\n ");
@@ -145,18 +146,15 @@ void call2moves(int numof_moves_top_stack, char *move_type_top_stack, int numof_
 org_stack_b_2s_move function indicates which is the type of movement the
 travelling number will need to organise b stack: "rb" or "rrb".
 ____________________________________________________________________________*/
-char *org_stack_b_2s_move (int *stack_b, int len_b, int index_ns)
+char *org_stack_b_2s_move (int *stack_b, int len_b, int index_top_b)
 {
     char *move_type;
    
-    printf("line 23 | len_b = %d\n", len_b);
-    printf("index_ns = %d\n", index_ns);
+    printf("line 23 | len_b = %d | index_top_b = %d\n", len_b, index_top_b);
     //printf("call2moves.c line 88 | index_ns = %d\n", index_ns);
-    if (len_b == 2)
-        //No movement needed
-    if (index_ns < (len_b / 2))
+    if (index_top_b <= (len_b / 2))
         move_type = "rb";
-    if (index_ns >= (len_b / 2))
+    if (index_top_b > (len_b / 2))
         move_type = "rrb";
     //printf("org_stack_b | index_ns = %d | numof_moves = %d\n", index_ns, numof_moves);
     //printf("move_type_org_b_2s_move = %s\n", move_type);
@@ -202,7 +200,9 @@ int *which_moves(int **stack_a, int *len_a, int **stack_b, int *len_b, int index
     index_top_b = org_stack_b_1 (*stack_b, *len_b, *stack_a[index_travel_nb]);
 	printf("exec_moves.c | line 204 | index_top_b = %d\n", index_top_b);
     numof_moves_org_b = org_stack_b_2 (*stack_b, *len_b, index_top_b);
+    printf("we are checking, exec_moves.c | line 205 | numof_moves_org_b = %d | index_top_b = %d\n", numof_moves_org_b, index_top_b);
     move_type_org_b = org_stack_b_2s_move (*stack_b, *len_b, index_top_b);
+    printf("we are checking, exec_moves.c | line 207 | move_type_org_b = %s\n", move_type_org_b);
     //printf("exec_moves.c | line 206 | which_moves function checkers:\n");
     //check_moves(numof_moves_top_stack, move_type_top_stack, numof_moves_org_b, move_type_org_b);
     //printf("Before:\n");
