@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:58:00 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/28 12:06:39 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:59:49 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@
     return (len);
 }*/
 
+/*DESCRIPTION:
+isdigit function:
+returns 1: if YES: '-', or [0-9]
+returns 0: if NOT
+__________________________________*/
+int ft_isdigit(char c)
+{
+	if (c == '-' || (c >= '0' && c <= '9'))
+		return (1);
+	return (0);
+}
 
 /*DESCRIPTION
 strcmp function compares str1 and str2.
@@ -73,6 +84,24 @@ void put_matrix (char **list_moves)
     }
 }
 
+int	atoi2(char *str)
+{
+	int	sign;
+	int	i;
+	int	result;
+
+	i = 0;
+	sign = 1;
+	if (str[i] == '-')
+		sign = -1;
+	i++;
+	result = 0;
+	while (str[i] != '\0')
+	{
+		result = result * 10 + (str[i] - 48);
+	}
+	return (result);
+}
 
 int ft_strlen (char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:14:27 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/28 12:04:57 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:35:24 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,12 @@ void    check_before (int *stack_a, int *stack_b, int len_a, int len_b)
     printf("\n");
 }
  
-int main(void)
+int main(int argc, char **argv)
 {
-    int *stack_a;
+    /*int *stack_a;
     int *stack_b;
     int *len_a;
     int *len_b;
-
-
-
 
     len_a[0] = 5;
     stack_a = malloc(sizeof(int)*(len_a[0]));
@@ -59,7 +56,6 @@ int main(void)
     stack_a[3] = 7;
     stack_a[4] = 16;
 
-
     len_b[0] = 7;
     stack_b = malloc(sizeof(int)*(len_a[0]));
     stack_b[0] = 21;
@@ -68,14 +64,14 @@ int main(void)
     stack_b[3] = 6;
     stack_b[4] = 4;
     stack_b[5] = 2;
-    stack_b[6] = 0;
-
+    stack_b[6] = 0;*/
 
     //Checking BEFORE:
-    printf("Beginning:\n");
-    put_2stacks (stack_a, len_a, stack_b, len_b);
+    push_swap (argc, argv);
+    //printf("Beginning:\n");
+    //put_2stacks (stack_a, len_a, stack_b, len_b);
     //check_before(stack_a, stack_b, len_a, len_b);
-    push_swap(&stack_a, &stack_b, &len_a, &len_b);
+    //push_swap(&stack_a, &stack_b, &len_a, &len_b);
     return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:47:45 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/28 12:03:09 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:49:49 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void decide_move_stack_b(char *move_type, int **stack_b, int len_b) //cambiaré 
     }
 }
 
-
 void decide_move_stack_a(char *move_type, int ***stack_a, int len_a) //cambiaré el prototipo a int *decide_move, porque como lo utilizaré para llamar a los movimientos, voy a querer recibir los stacks modificados.
 {
     printf("\nESTAMOS DENTRO DE DECIDE_MOVE: stack B\n");
@@ -121,7 +120,6 @@ void decide_move_stack_a(char *move_type, int ***stack_a, int len_a) //cambiaré
         write(1, "rra\n", 4);//print the move_type
     }
 }
-
 
 //después, pondré que devuelta int * para que devuelva el stack
 void call2moves(int numof_moves_top_stack, char *move_type_top_stack, int numof_moves_org_b, char *move_type_org_b, int **stack_a, int *len_a, int **stack_b, int *len_b)

@@ -6,103 +6,187 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 13:27:58 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/28 12:29:06 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:34:11 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-
-int ft_strlen (char *str)
+int	ft_duplicate (int *arr, int len)
 {
-    int len;
+	int	i;
+	int y; 
 
-
-    len = 0;
-    while(str[len] != '\0')
-    {
-        len++;
-    }
-    return (len);
+	i = 0;
+	while (i < len)
+	{
+		y = i + 1;
+		while (y < len)
+		{
+			if (arr[i] == arr[y])
+            {
+                //printf("Duplicate location, i = %d | y = %d\n", i, y);
+                return (1); //duplicated integers have been found
+            }
+            y++;
+		}
+		i++;
+	}
+    return (0);
 }
 
-
-void    put_arr(int *stack, int len)
+/*DESCRIPTION:
+isdigit function:
+returns 1: if YES: '-', or [0-9]
+returns 0: if NOT
+__________________________________*/
+/*int ft_isdigit(char c)
 {
-    int i;
+	if (c == '-' || (c >= '0' && c <= '9'))
+		return (1);
+	return (0);
+}*/
 
+int next_position_with_int (char **argv, int x, int y, int counter_previous, int keep_len_arg)
+{
+	int n;
 
-    i = 0;
-    while (len > 0)
-    {
-        printf("stack[%d] = %d\n", i, stack[i]);
-        len--;
-        i++;
-    }
+	printf("line 33 | y = %d\n", y);
+    y = y + counter_previous;
+	n = 0;
+    printf("line 35 | y = %d | argv[%d][%d] = %c\n", y, x, y, argv[x][y]);
+	while (ft_isdigit(argv[x][y]) == 0 && y < keep_len_arg)
+	{
+        printf("line 41 | bucle barruan | y = %d | keep_len_arg = %d | argv[%d][%d] = %c\n", y, keep_len_arg, x, y, argv[x][y]);
+		n++;
+		y++;
+	}
+    printf("line 42 | y = %d | n = %d\n", y, n);
+    if (y >= (keep_len_arg - 1)) //si la posición ya es mayor al len, es decir, si ya nos hemos pasado el largo del argumento
+        return (0);
+    //printf("line 45 | la posición del comienzo del próximo primer dígito del int, y = %d\n", y);
+	return (y);
 }
 
-
-void fill_str(char **argv, int x, int y, char **str)
+/*void	put_str(char *str)
 {
-    int i;
-   
-    i = 0;
-    printf("x = %d\n", x);
-    printf("y = %d\n", y);
-    /*while(argv[x][y] != ' ')
-    {
-        printf("hemen gaude\n");
-        *str[i] = argv[x][y];
-        i++;
-        x++;
-        y++;
-    }*/
-    argv[x][y] = '\0';
+	int	len;
+
+	len = 0;
+	while (str[len] != '\0')
+	{
+		write(1, &str[len], 1);
+		len++;
+	}
+	write (1, "\n", 1);
+}*/
+
+/*int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len] != '\0')
+	{
+		len++;
+	}
+	return (len);
+}*/
+
+void	put_arr(int *stack, int len)
+{
+	int	i;
+
+	i = 0;
+	while (len > 0)
+	{
+		printf("stack[%d] = %d\n", i, stack[i]);
+		len--;
+		i++;
+	}
 }
 
-
-int numof_digits(char **argv, int x, int y)
+/*DESCRIPTION:
+Rellena el str con los caracteres que componen nuestro futuro int. Así, genera
+el str que le mandaremos a atoi.
+____________________________*/
+char *fill_str(char **argv, int x, int y, char *str, int counter)
 {
-    int counter;
-   
-    counter = 0;
-    while(argv[x][y] != ' ')
-    {
-        printf("ya\n");
-        counter++;
-        y++;
-    }
-    return (counter);
-}
+	int	i;
+	//int len_arg;
 
-
-int atoi2(char *str)
-{
-    int sign;
-    int i;
-    int result;
-   
-    i = 0;
-    sign = 1;
-    if(str[i] == '-')
-        sign = -1;
-    i++;
-
-
-    result = 0;
-    while(str[i] != '\0')
-    {
-        result = result*10 + (str[i] - 48);
-    }
-    return (result);
+	//printf("line 63 | inside fill_str\n");
+	i = 0;
+	//printf("x = %d\n", x);
+	//printf("y = %d\n", y);
+	//len_arg = ft_strlen(argv[x]);
+	//printf("line 66 || len_arg = %d\n", len_arg);
+	/*str[0] = '-';
+	str[1] = '1';
+	str[2] = '2';
+	str[3] = '\0';
+	printf("str[0] = %c\n", str[0]);
+	printf("str[1] = %c\n", str[1]);
+	printf("str[2] = %c\n", str[2]);
+	printf("str[3] = %c\n", str[3]);*/
+	
+	while (counter > 0)
+	{
+		printf("line 66 || dentro de fill_str || x = %d || y = %d || argv[%d][%d] = %c\n", x, y, x, y, argv[x][y]);
+		str[i] = argv[x][y];
+		i++;
+		y++;
+		counter--;
+	}
+	//printf("x = %d | y = %d\n", x, y);
+	str[i] = '\0';
+	//printf("str = %s\n", str);
+	return (str);
 }
 
 
 /*DESCRIPTION:
+numof_digits cuenta el número de digitos total que tiene cada integer
+---------------------------------------------------------------------*/
+/*int	numof_digits(char **argv, int x, int y, int len_arg)
+{
+	int	counter;
+
+	counter = 0;
+	//printf("line 129 | numof_digits function, x = %d | y = %d | len_arg = %d\n", x, y, len_arg);
+	while (ft_isdigit(argv[x][y]) == 1)
+	{
+		//printf("line 172 || bucle dentro de numof_digits\n");
+		counter++;
+		y++;
+	}
+	return (counter);
+}*/
+
+/*int	atoi2(char *str)
+{
+	int	sign;
+	int	i;
+	int	result;
+
+	i = 0;
+	sign = 1;
+	if (str[i] == '-')
+		sign = -1;
+	i++;
+	result = 0;
+	while (str[i] != '\0')
+	{
+		result = result * 10 + (str[i] - 48);
+	}
+	return (result);
+}*/
+                              
+/*DESCRIPTION:
 fill_stack function updates list_pre_checker2 by filling it with values
 -----------------------------------------------------------------*/
-void fill_stack (int **list_pre_checker2, int argc, char **argv)
+int *fill_stack (int *list_pre_checker2, int argc, char **argv)
 {
     //int *stack_a;
     int x;
@@ -112,38 +196,112 @@ void fill_stack (int **list_pre_checker2, int argc, char **argv)
     char *str;
     int counter;
     int m;
+    int len_arg;
+    int keep_len_arg;
 
 
     printf("kaixo kaixo estamos en fill_stack\n");
-   
     x = 1;
     a = 0;
     m = 0;
-    printf("argc = %d\n", argc);
-    while(x < argc)
+    //printf("argc = %d\n", argc);
+    while(x < argc) // argc - 1 num.ºde argumentos que recorrer en total
     {
         printf("1ST BUCLE IN\n");
+        len_arg = ft_strlen(argv[x]);
+        keep_len_arg = len_arg;
+		//printf("line 135 | len_arg = %d\n", len_arg);
         y = 0;
-        while(argv[x][y] != '\0' ) //1. siempre primero dentro del mismo argumento
+        printf("argumentu berri honekin hasi aurretik, EGOERA: x = %d | y = %d | argv[%d][%d] = %c\n", x, y, x, y, argv[x][y]);
+        while(len_arg > 0 ) //1. siempre primero dentro del mismo argumento
         {
-            //printf("hellowis\n");
-            if(argv[x][y] != ' ')
+            while(ft_isdigit(argv[x][y]) == 0)
+                y++;
+            printf("2ND BUCLE IN\n");
+            if(ft_isdigit(argv[x][y]) == 1) //tantas veces como n.º de caracteres tenga cada número, entrará aquí. Ej.: si el int es -8, entrará 2 veces. Si el int es 1234, entrará 4 veces
             {
-                counter = numof_digits(argv, x, y);
+				printf("3RD CONDITION\n");
+                counter = numof_digits(argv, x, y, len_arg);
+                printf("numof_digits of int = %d\n", counter);
                 str = malloc(sizeof(char) * (counter + 1)); //+1 = `para el final nulo
-                fill_str(argv, x, y, &str);
+                str = fill_str(argv, x, y, str, counter);
                 printf("antes de atoi2, char *str = %s\n", str);
-                *list_pre_checker2[m] = atoi(str);
+				//printf("m = %d\n", m);
+                list_pre_checker2[m] = atoi(str);
+				printf("line 198 | m = %d | after atoi | list_pre_checker2[%d] = %d\n", m, m, list_pre_checker2[m]);
                 free (str);
-                printf("JAJA counter = %d\n", counter);
+                printf("line 200 | successful free, nos salimos del if\n");
             }
             m++;
-            y++;
+            printf("line 204 | y = %d | keep_len_arg = %d\n", y, keep_len_arg);
+            y = next_position_with_int(argv, x, y, counter, keep_len_arg); //next_position_with_int devuelve 0 si ya ha acabado el argumento = entonces vamos a x++ next argumento, si no, nos devuelve la posición en la que habrá un siguiente int dentro de nuestro argumento actual
+            //printf("line 207 | y = %d\n", y);
+            if (y == 0)
+            {
+                printf("nohemoh pazao del argumentoo, ya no hay más integers aquí, vamonoh to the next argumento!\n");
+                break;
+            }
+			printf("line 173 | len_arg = %d | x = %d | y = %d\n", len_arg, x, y);
+			printf("line 203 | y means NEXT POSITION OF SAME ARGUMENT WHERE NEXT INT WILL START, y = %d\n", y);
+            len_arg--;
+			printf("line 176 | hurrengo buelta eman aurretik: m = %d | x = %d | y = %d | len_arg = %d | argv[%d][%d] = %c\n", m, x, y, len_arg, x, y, argv[x][y]);
         }
         x++;
+		printf("line 178 | NEXT argumentora! :) \n");
     }
+	return (list_pre_checker2);
 }
 
+/*DESCRIPTION: 
+numof_int functions returns the number of integers we will find along the arguments, 
+which means, the len of our stack_a. 
+
+In our case, we will also use this len for defining the size of stack_b.
+------------------------------------------------------------------------------------*/
+int numof_int(int argc, char **argv)
+{
+	int	x;
+	int	y;
+	int	counter;
+	int len_arg;
+
+	x = 1;
+    counter = 0;
+    //printf("line 248 || argc = %d |||||||| and x = %d\n", argc, x);
+    while(x < argc)
+    {
+        //printf("line 182 || x = %d\n", x);
+        //printf("yes\n");
+        //y = 0;
+        len_arg = ft_strlen(argv[x]);
+        //printf("line 188 || len_arg = %d\n", len_arg);
+        y = 0;
+        while(len_arg > 0) //1. siempre primero dentro del mismo argumento
+        {
+            //printf("hellowis\n");
+            //printf("line 190 || x = %d || y = %d\n", x, y);
+            if(argv[x][y] != ' ')
+            {
+                //printf("line 193                  || x = %d || y=%d || argv[x][y] = %c\n", x, y, argv[x][y]);
+                counter++; //en cuanto encuentre algo distinto al espacio (negativo o digito), sumar counter
+                while(argv[x][y] != ' ' && len_arg > 0)
+                {
+                    //printf("sartu da, x = %d eta y = %d eta len_arg = %d\n", x, y, len_arg);
+                    y++;
+                    len_arg--;
+                }
+                //printf("counter = %d\n", counter);
+               
+            }
+            y++;
+            len_arg--;
+        }
+        x++;
+        printf("&&&&&& line 278 || kanpuan gare || counter lleva %d hemos estado en x = %d, y vamos a x = %d\n", counter, (x-1), x);
+    }
+    printf("---------------------------------->>>>>>>>>>>> counter FINALLY = %d\n", counter);
+	return(counter);
+}
 
 /*DESCRIPTION:
 checker_2 makes sure that there are no duplicated numbers along the arguments.
@@ -156,55 +314,71 @@ How?
     1.2 each number = 1 position of array as integer
 2. Compares integers (is there any value repeated? YES/NO)
 
-
 //para que entre aquí ya solo tienen que ser los siguientes: (checker_1)
 - dígitos
 - espacios
 - negativos
 
-
 1: error found
 0: NO error found, OK!
 ---------------------------------------------------------------------------*/
-int checker_2(int argc, char **argv)
+int checker_last(int argc, char **argv)
 {
-    int x;
-    int y;
-    int counter;
+    //int x;
+    //int y;
+    //int counter;
     int *list_pre_checker2;
-    int len_arg;
+    int len_stack;
 
-
-    x = 1;
+    /*x = 1;
     counter = 0;
-    printf("argc = %d |||||||| and x = %d\n", argc,x);
-    y = 0;
+    //printf("line 248 || argc = %d |||||||| and x = %d\n", argc, x);
     while(x < argc)
     {
-        printf("yes\n");
+        //printf("line 182 || x = %d\n", x);
+        //printf("yes\n");
         //y = 0;
         len_arg = ft_strlen(argv[x]);
-        while(argv[x][y] != '\0' ) //1. siempre primero dentro del mismo argumento
+        //printf("line 188 || len_arg = %d\n", len_arg);
+        y = 0;
+        while(len_arg > 0) //1. siempre primero dentro del mismo argumento
         {
             //printf("hellowis\n");
+            //printf("line 190 || x = %d || y = %d\n", x, y);
             if(argv[x][y] != ' ')
             {
+                //printf("line 193                  || x = %d || y=%d || argv[x][y] = %c\n", x, y, argv[x][y]);
                 counter++; //en cuanto encuentre algo distinto al espacio (negativo o digito), sumar counter
-                while(argv[x][y] != ' ')
+                while(argv[x][y] != ' ' && len_arg > 0)
+                {
+                    //printf("sartu da, x = %d eta y = %d eta len_arg = %d\n", x, y, len_arg);
                     y++;
-                printf("counter = %d\n", counter);
+                    len_arg--;
+                }
+                //printf("counter = %d\n", counter);
+               
             }
-        y++;
+            y++;
+            len_arg--;
         }
         x++;
+        printf("&&&&&& line 278 || kanpuan gare || counter lleva %d hemos estado en x = %d, y vamos a x = %d\n", counter, (x-1), x);
     }
-    printf("counter FINALLY = %d\n", counter);
-    list_pre_checker2 = malloc(sizeof(int)*counter);
+    printf("---------------------------------->>>>>>>>>>>> counter FINALLY = %d\n", counter);*/
+    len_stack = numof_int(argc, argv);
+	printf("line 369 | len_stack = %d\n", len_stack);
+	list_pre_checker2 = malloc(sizeof(int)*len_stack);
     //printf("kaixo estamos aquí\n");
-    fill_stack(&list_pre_checker2, argc, argv); //así rellenenan los números en cada posición del array list_pre_checker_2. Si no hay duplicados, este se convertirá en el stack_a. En caso contrario, error. Le pasamos la dirección de list
-    printf("list_pre_checker2: ");
-    put_arr(list_pre_checker2, counter);
-    return (0); //a boleo oingoz   
+    list_pre_checker2 = fill_stack(list_pre_checker2, argc, argv); //así rellenenan los números en cada posición del array list_pre_checker_2. Si no hay duplicados, este se convertirá en el stack_a. En caso contrario, error. Le pasamos la dirección de list
+	printf("linr 373 | len_stack = %d | list_pre_checker2: \n", len_stack);
+    put_arr(list_pre_checker2, len_stack);
+	if (ft_duplicate(list_pre_checker2, len_stack) == 1)
+	{
+		//printf("sí hay duplicados\n");
+		return (1);
+	}
+	else
+		return (0);
 }
    
     /*x = 1;
@@ -236,7 +410,6 @@ int checker_2(int argc, char **argv)
     }
 }
 
-
 DESCRIPTION:
 checker_1 makes sure that only digits (0-9), space ' ' and negative sign '-'
 are found along the arguments and returns a integer indicating whether if
@@ -244,63 +417,69 @@ the error has been found or not.
 1: error found
 0: NO error found, OK!
 ---------------------------------------------------------------------------*/
-int checker_1(int argc, char **argv)
+int	checker_1(int argc, char **argv)
 {
-    int x;
-    int y;
+	int x;
+	int y;
 
-
-    x = 1;
-    y = 0;
-
-
-    while(x < argc)
-    {
-        y = 0;
-        while(argv[x][y] != '\0')
-        {
-            if((argv[x][y] >= '0' && argv[x][y] <= '9') || argv[x][y] == (char)32 || argv[x][y] == '-')
-            {
-                //printf("yes\n");
-                y++;
-            }
-            else
-            {
-                printf("x = %d\ny = %d\n", x, y);
-                return (1);
-            }
-        }
-        x++;
-    }
-    return (0);
+	x = 1;
+	y = 0;
+	while (x < argc)
+	{
+		y = 0;
+		while (argv[x][y] != '\0')
+		{
+			if (ft_isdigit(argv[x][y]) == 1 || argv[x][y] == (char)32)
+			{
+				//printf("yes\n");
+				y++;
+			}
+			else
+			{
+				printf("x = %d\ny = %d\n", x, y);
+				return (1);
+			}
+		}
+		x++;
+	}
+	return (0);
 }
 
-
+int checkers_index (int argc, char **argv)
+{
+	if (checker_1(argc, argv) == 0)
+	{
+		if (checker_last(argc, argv) == 0)
+		{
+			return (0); //esto es que ha pasado todos los errores, vamos!
+		}
+		else
+			return (1);
+	}
+	else
+		return (1);
+}
 /*DESCRIPTION:
 argc (argument count): number of arguments (integer)
 argv (argument vector): array of strings
 
-
 //luego a esta función main le cambiaré el nombre a check_errors y lo llamaré desde mi push_swap
-
 
 errores que quiero chequear:
 1. solo números, espacios y signos negativos
 2. después de negativo, solo números, si no error
 3.
 --------------------------------------------------------------------------*/
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
     int rtdo_checker_1;
     int rtdo_checker_2;
     int rtdo_checker_3;
 
-
     //rtdo_checker_1 = checker_1(argc, argv);
     //printf("Checker_1: %d\n", rtdo_checker_1);
 
-
-    rtdo_checker_2 = checker_2(argc, argv);
-    printf("Checker_1: %d\n", rtdo_checker_1);
+    rtdo_checker_2 = checker_last(argc, argv);
+    printf("Checker_2: %d\n", rtdo_checker_2);
     return (0);
-}
+}*/

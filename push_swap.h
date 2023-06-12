@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:53:56 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/05/28 12:06:10 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:37:57 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,21 @@
 
 //file: main.c
 void    check_before (int *stack_a, int *stack_b, int len_a, int len_b);
-void check_moves(int numof_moves_top_stack, char *move_type_top_stack, int numof_moves_org_b, char *move_type_org_b);
+void    check_moves(int numof_moves_top_stack, char *move_type_top_stack, int numof_moves_org_b, char *move_type_org_b);
 
+//file: check_errors.c
+int	ft_duplicate (int *arr, int len);
+int next_position_with_int (char **argv, int x, int y, int counter_previous, int keep_len_arg);
+char *fill_str(char **argv, int x, int y, char *str, int counter);
+int	numof_digits(char **argv, int x, int y, int len_arg);
+int *fill_stack (int *list_pre_checker2, int argc, char **argv);
+int checker_last(int argc, char **argv);
+int	checker_1(int argc, char **argv);
+int checkers_index (int argc, char **argv);
 
 //file: push_swap.c
-int *push_swap(int *stack_a, int *stack_b, int *len_a, int *len_b);
+int	push_swap(int argc, char **argv);
+int	*letsgo(int *stack_a, int *stack_b, int *len_a, int *len_b);
 
 
 //file: get_travel_nb.c
@@ -41,6 +51,7 @@ int get_cheapest_nb(int *stack_a, int *stack_b, int len_a, int len_b);
 
 //file: utils.c
 int strcmp (const char *str1, const char *str2);
+int ft_isdigit(char c);
 
 
 //int       len_arr(int *stack);
