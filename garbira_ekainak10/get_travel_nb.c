@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:11:53 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/06/12 21:15:03 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:10:07 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int ft_index_biggest (int *stack_b, int len_b)
 	keep_len_b = len_b;
 	i = 0;
 	value_biggest = stack_b[i];
-    printf("get_travel_nb.c | line 36 | value_biggest = %d | len_b = %d\n", value_biggest, len_b);
 	while (len_b > 0) //get the value of the biggest value in stack_b
 	{
 		if (stack_b[i] > value_biggest)
@@ -45,7 +44,7 @@ int ft_index_biggest (int *stack_b, int len_b)
 		i++;
 		len_b--;
 	}
-	//printf("get_travel_nb.c | line 33 | value_biggest = %d | keep_len_b = %d\n", value_biggest, keep_len_b);
+	printf("get_travel_nb.c | line 33 | value_biggest = %d | keep_len_b = %d\n", value_biggest, keep_len_b);
 	i = 0;
 	while (keep_len_b > 0) //identificar el índice del biggest value, que es lo que nos interesa para poder ver cuál es el movimiento que vamos a necesitar hacer
 	{
@@ -83,13 +82,15 @@ int ft_value_next_smallest_NEW (int *stack_b, int len_b, int travel_nb)
         len_b --;
     }
     printf("get_ttravel_nb.c | line 85 | numof_smaller_or_same_values = %d\n", numof_smaller_values);
-    arr_smaller_values_tmp = malloc(sizeof(int) * numof_smaller_values);
+    arr_smaller_values_tmp = malloc(sizeof(int) * (numof_smaller_values + 4)); //noia + 1 jartzera para evitar segfault, para andar más holgada, baina berez ezan bihako, eztot entenditzen, wtf. porq hace falta esta trampaaa 
     i = 0;
     y = 0;
     while (keep_len_b > 0)
     {
+        printf("get_travel_nb.c | line 90 | bai hemen gare, keep_len_b = %d\n", keep_len_b);
         if (stack_b[i] < travel_nb)
         {
+            printf("ta hona brrura, keep_len = %d | i = %d | stack_b[%d] = %d | travel_nb  = %d\n", keep_len_b, i, i, stack_b[i], travel_nb);
             arr_smaller_values_tmp[y] = stack_b[i];
             printf("arr[%d] = %d\n", i, arr_smaller_values_tmp[i]);
             y++;
@@ -160,7 +161,7 @@ ____________________________________________________________________________*/
 }*/
 
 
-char *are_there_smaller_values(int *stack_b, int len_b, int travel_nb)
+int are_there_smaller_values(int *stack_b, int len_b, int travel_nb)
 {
     int numof_smaller_values;
     int i;
@@ -176,9 +177,9 @@ char *are_there_smaller_values(int *stack_b, int len_b, int travel_nb)
     }
 
     if (numof_smaller_values == 0)
-        return ("No");
+        return (0);
     else
-        return ("Yes");
+        return (1);
 }
 
 int ft_index_next_smallest (int *stack_b, int len_b, int value_next_smallest)
@@ -240,7 +241,7 @@ int org_stack_b_1 (int *stack_b, int len_b, int travel_nb)
 	int index_biggest;
     int value_next_smallest;
 
-    if (ft_strcmp(are_there_smaller_values(stack_b, len_b, travel_nb), "Yes") == 0)
+    if (are_there_smaller_values(stack_b, len_b, travel_nb) == 1)
     {
         printf("top b: NEXT SMALLEST\n");
         value_next_smallest = ft_value_next_smallest_NEW(stack_b, len_b, travel_nb);
@@ -248,7 +249,7 @@ int org_stack_b_1 (int *stack_b, int len_b, int travel_nb)
         index_next_smallest = ft_index_next_smallest (stack_b, len_b, value_next_smallest);
         return (index_next_smallest);
     }
-    if (ft_strcmp(are_there_smaller_values(stack_b, len_b, travel_nb), "No") == 1)
+    if (are_there_smaller_values(stack_b, len_b, travel_nb) == 0)
     {
         printf("top b: BIGGEST OF ALL\n");
         index_biggest = ft_index_biggest(stack_b, len_b);

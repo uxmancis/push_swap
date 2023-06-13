@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:42:32 by uxmancis          #+#    #+#             */
-/*   Updated: 2023/06/11 16:21:15 by uxmancis         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:23:29 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ int	*sort_it(int *stack_a, int len_stack_a, int *stack_b, int len_stack_b) //se 
 	int numof_moves_org_b;
 	char *move_type_org_b;
 	int ind_ns;
+	int travel_nb;
+	int index_top_b;
+	int keep_len_b;
 
 	keep_len_stack_a = len_stack_a - 1 -2; //porque quiero que en el stack_a quede 1 número, so, quiero que los pb-s sean 1 menos que el len del stack_a. y luego le quito 2 más, por los 2 pb-s que hacemos nada más empezar. el -1 hay que mantenerlo sí o sí, porque no puedo pasar todos los númeross. porque, cuando se passa el úlltiimo es por descarte, y hace pb directamente, y lo descuaddra todo.
 	printf("keep_len_stack_a = %d\n", keep_len_stack_a);
@@ -70,8 +73,53 @@ int	*sort_it(int *stack_a, int len_stack_a, int *stack_b, int len_stack_b) //se 
 		put_arr (stack_a, len_stack_a);
 		printf("stack_b:\n");
 		put_arr (stack_b, len_stack_b);
+		printf("\n----------------berrixe hasi, next movement: ----------\n");
 		keep_len_stack_a--;
 	}
+	//3. cuando solo quede 1 last valor que passar, ya sabemoss cuál va a ser el travel_nb. Organizar b para recibirlo + pasarlo
+	travel_nb = stack_a[0];
+	index_top_b = org_stack_b_1 (stack_b, len_stack_b, travel_nb);
+	numof_moves_org_b = org_stack_b_2 (stack_b, len_stack_b, index_top_b);
+	move_type_org_b = org_stack_b_2s_move (stack_b, len_stack_b, index_top_b);
+	call2moves(0, "sa", numof_moves_org_b, move_type_org_b, &stack_a, &len_stack_a, &stack_b, &len_stack_b);
+	printf("FINALLY:\n");
+	printf("stack_a:\n");
+	put_arr (stack_a, len_stack_a);
+	printf("stack_b:\n");
+	put_arr (stack_b, len_stack_b);
+
+	//4. Detectar cuál es el index biggests de todo el stack_b para ordenarlo
+	index_biggest_in_stack_b = ft_index_biggest (stack_b, len_stack_b);
+	index_top_b = index_biggest_in_stack_b;
+	printf("index_top_b = %d\n", index_top_b);
+	numof_moves_org_b = org_stack_b_2 (stack_b, len_stack_b, index_top_b);
+	move_type_org_b = org_stack_b_2s_move (stack_b, len_stack_b, index_top_b);
+	while (numof_moves_org_b > 0)
+	{
+		decide_move_stack_b(move_type_org_b, &stack_b, &len_stack_b);
+		numof_moves_org_b--;
+	}
+	//call2moves(0, "sa", numof_moves_org_b, move_type_org_b, &stack_a, &len_stack_a, &stack_b, &len_stack_b);
+	printf("BEFORE PAs de vuelta:\n");
+	printf("stack_a:\n");
+	put_arr (stack_a, len_stack_a);
+	printf("stack_b:\n");
+	put_arr (stack_b, len_stack_b);
+
+	//5. Devolver pa-s a stack_a de vuelta tantas como len_stack_b veces
+	printf("len_stack_b = %d\n", len_stack_b);
+	keep_len_b = len_stack_b;
+	while(keep_len_b > 0)
+	{
+		decide_move_both_stacks("pa", &stack_a, &len_stack_a, &stack_b, &len_stack_b);
+		keep_len_b--;
+	}
+	printf("AFTER PAs de vuelta:\n");
+	printf("stack_a:\n");
+	put_arr (stack_a, len_stack_a);
+	printf("stack_b:\n");
+	put_arr (stack_b, len_stack_b);
+
 	//printf("push_swap.c | line 75 | last value, stack_a[0] = %d\n", stack_a[0]);
 	//ind_b_ns = index_next_smallest(stack_b, len_stack_b, stack_a[0]);
 	//printf("push_swap.c | line 76 | ind_b_n = %d\n", ind_b_ns);
